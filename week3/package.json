@@ -4,7 +4,7 @@
   "description": "Week 3 assignments",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint **/*.ts --fix",
+    "lint": "eslint src/**/*.ts --fix",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "author": "",
