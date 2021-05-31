@@ -1,3 +1,5 @@
+import { resolveModuleName } from "typescript";
+
 // #1 Array copying
 export const numbers = [1, 2, 3, 4, 5];
 
@@ -5,12 +7,21 @@ export const originalNumbers = numbers.map(number => number);
 console.log(originalNumbers);
 
 // refactor here
+export const updatedNumbers = [...numbers];
+
+
+console.log(updatedNumbers);
 
 // #2 Combining arrays
 export const winners = ['first'];
 export const runnerUps = ['second', 'third', 'fourth', 'fifth'];
 
 // refactor here
+
+export const allParticipants = [...winners, ...runnerUps];
+
+
+console.log(allParticipants);
 
 // #3 Combining objects
 export const bob = {
@@ -23,7 +34,11 @@ export const kyle = {
 
 export const originalPersons = Object.assign(bob, kyle);
 
+console.log(originalPersons);
+
 // refactor here
+export const updatedPersons = {...bob, ...kyle};
+console.log(updatedPersons);
 
 // #4 Modifying values in arrays of objects
 export const data = [
@@ -53,4 +68,17 @@ export const originalUpdates = data.map(task => {
   return task;
 });
 
+
 // refactor here
+export const updateObject = (args: Array<any> ) => {
+  for(let arg of args ){
+    if(arg.id === update.id)
+    {
+
+      Object.assign(arg, update);
+    }
+  }
+  return args;
+}
+
+updateObject(data);
