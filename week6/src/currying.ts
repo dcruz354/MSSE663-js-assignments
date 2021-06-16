@@ -22,12 +22,20 @@ export function doMath(a: number) {
 }
 
 // source code here
-export function subtract(a: number, b: number, c: number) {
-  return a + b - c;
-} 
+export const subtract = (a: number) => (b: number) => (c: number) => a + b - c;
+
+
+export const add = (a: number) => (b:number) => (c:number) =>
+  subtract(a)(b)(c);
+
+export const doMath2 = (a:number) => (b:number) => (c: number) => add(a)(b)(c);
 
 // #3 Write a curried function that returns an array containing the ninjas who have a black belt
-export const ninjasOne = [
+interface Ninja {
+  name: string;
+  belt: string;
+}
+export const ninjasOne: Ninja[] = [
   { name: 'Michelangelo', belt: 'white' },
   { name: 'Donatello', belt: 'green' },
   { name: 'Raphael', belt: 'black' },
@@ -42,7 +50,7 @@ export const ninjasOne = [
   { name: 'Wong Fei-hung', belt: 'green' }
 ];
 
-export const ninjasTwo = [
+export const ninjasTwo: Ninja[]  = [
   { name: 'Michelangelo', belt: 'white' },
   { name: 'Donatello', belt: 'green' },
   { name: 'Raphael', belt: 'black' },
@@ -66,23 +74,34 @@ export function blackBeltsNinjas(arrOne: Array<any>) {
  * @example { name: 'Colt', belt: 'green', status: 'warrior' }
  */
 
-export const statusTypes = {
+type GenericObject = { [key: string]: string};
+
+export interface NinjaWarrior extends Ninja {
+  status: string;
+}
+
+export const statusTypes: GenericObject = {
   white: 'grasshopper',
   green: 'warrior',
   black: 'sensei'
 };
 
-export const gamerStatusTypes = {
+export const gamerStatusTypes: GenericObject = {
   white: 'Noob',
   green: 'Choob',
   black: 'Legend'
 };
 
+const mapper = (arr: Ninja[]) => (status: GenericObject) =>
+arr.map((ninja: Ninja) => {
+  return {
+    ...ninja,
+    status: status[ninja.belt]
+  };
+});
 
 // source code here
-export function exampleFour( arrOne: Array<any>) {
-  return (arrTwo: Array<any>) => {
-    const arrThree = [...arrOne, ...arrTwo];
-    return arrThree.map(obj => ({...obj, Status: 'grasshopper' }));
-  }
-}
+export const ninjaWarriosOne: NinjaWarrior[] = mapper(ninjasOne)(statusTypes);
+
+export const ninjaWarriosTwo: NinjaWarrior[] = mapper(ninjasTwo)(gamerStatusTypes);
+

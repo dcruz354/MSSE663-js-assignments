@@ -11,12 +11,13 @@
 const things = ['thing1', 'thing2'];
 
 // create callback here
-function callback(id: number, name: string) {
-    return { id, name}
-}
+const  callback = (thing: string, i: number) => ({
+    id: i + 1,
+    name: thing
+});
 
 // create map here
-export const produceResult = things.map((name, id) => callback(id + 1, name));
+export const produceResult = things.map(callback);
 
 
 /**
@@ -28,21 +29,12 @@ export const produceResult = things.map((name, id) => callback(id + 1, name));
  */
 
 // create function here
-export function exampleTwo(key: any) {
-    return (id: number) => {
-        if(id === key.id) {
-            return true;
-        }
-
-        return false;
-    }
+interface Thing {
+    id: number;
+    name: string;
 }
 
-export function filterExampleOne(arrOne: Array<any>) {
-    return (id: number) => {
-        return arrOne.filter(element =>{ const result = exampleTwo(element);
-            return result(id);
-        } ) [0]
-    }
-}
+const filter = (comparitor: string) => (thing: Thing) => thing.name === comparitor;
+
+export const filteredThing = (comparitor: string) => produceResult.filter(filter(comparitor));
 

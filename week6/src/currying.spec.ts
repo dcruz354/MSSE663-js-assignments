@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { curryMe, exampleOne, doMath, subtract, blackBeltsNinjas, ninjasOne, ninjasTwo, exampleFour } from './currying';
+import { curryMe, exampleOne, doMath, subtract, blackBeltsNinjas, ninjasOne, ninjasTwo, doMath2, ninjaWarriosOne, ninjaWarriosTwo } from './currying';
 
 describe('Currying tests', () => {
   it('#1 should output the same result as the original function', () => {
@@ -12,7 +12,7 @@ describe('Currying tests', () => {
 
   it('#2 should output the same result as the original function', () => {
     const originaResult = doMath(1)(2)(3);
-    const exampleTwoResult = subtract(1, 2, 3);
+    const exampleTwoResult = doMath2(1) (2) (3);
     expect(originaResult).to.eq(exampleTwoResult);
   });
 
@@ -31,24 +31,29 @@ describe('Currying tests', () => {
   });
 
   it('#4 should return a new array of ninja objects with "status" added to each object', () => {
-    expect(exampleFour(ninjasOne)(ninjasTwo)).to.eql([
-      { name: 'Michelangelo', belt: 'white', Status: 'grasshopper' },
-      { name: 'Donatello', belt: 'green', Status: 'grasshopper' },
-      { name: 'Raphael', belt: 'black', Status: 'grasshopper' },
-      { name: 'Leonardo', belt: 'black', Status: 'grasshopper' },
-      { name: 'Mr. Miyagi', belt: 'black', Status: 'grasshopper' },
-      { name: 'Rocky', belt: 'black', Status: 'grasshopper' },
-      { name: 'Colt', belt: 'green', Status: 'grasshopper' },
-      { name: 'Tum Tum', belt: 'white', Status: 'grasshopper' },
-      { name: 'Haru', belt: 'white', Status: 'grasshopper' },
-      { name: 'The Bride', belt: 'black', Status: 'grasshopper' },
-      { name: 'Cammy', belt: 'black', Status: 'grasshopper' },
-      { name: 'Wong Fei-hung', belt: 'green', Status: 'grasshopper' },
-      { name: 'Michelangelo', belt: 'white', Status: 'grasshopper' },
-      { name: 'Donatello', belt: 'green', Status: 'grasshopper' },
-      { name: 'Raphael', belt: 'black', Status: 'grasshopper' },
-      { name: 'Jim', belt: 'black', Status: 'grasshopper' },
-      { name: 'The Rat', belt: 'black', Status: 'grasshopper' }
+    expect(ninjaWarriosOne).to.eql([
+      { name: 'Michelangelo', belt: 'white', status: 'grasshopper' },
+      { name: 'Donatello', belt: 'green', status: 'warrior' },
+      { name: 'Raphael', belt: 'black', status: 'sensei' },
+      { name: 'Leonardo', belt: 'black', status: 'sensei' },
+      { name: 'Mr. Miyagi', belt: 'black', status: 'sensei' },
+      { name: 'Rocky', belt: 'black', status: 'sensei' },
+      { name: 'Colt', belt: 'green', status: 'warrior' },
+      { name: 'Tum Tum', belt: 'white', status: 'grasshopper' },
+      { name: 'Haru', belt: 'white', status: 'grasshopper' },
+      { name: 'The Bride', belt: 'black', status: 'sensei' },
+      { name: 'Cammy', belt: 'black', status: 'sensei' },
+      { name: 'Wong Fei-hung', belt: 'green', status: 'warrior' }
+    ]);
+  });
+
+  it('#5 should return a new array of ninja objects with "status" added to each object', () => {
+    expect(ninjaWarriosTwo).to.eql([
+      { name: 'Michelangelo', belt: 'white', status: 'Noob' },
+      { name: 'Donatello', belt: 'green', status: 'Choob' },
+      { name: 'Raphael', belt: 'black', status: 'Legend' },
+      { name: 'Jim', belt: 'black', status: 'Legend' },
+      { name: 'The Rat', belt: 'black', status: 'Legend' }
     ]);
   });
 });
